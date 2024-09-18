@@ -1,4 +1,5 @@
 
+
 name: Ejemplo de Composite Action
 
 on: [push]
@@ -6,12 +7,11 @@ on: [push]
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-    #Variable
+    
     env:
-      MY_VAR: Mi variable de entorno
+      MY_VAR: Mi variable de entorno prueba
   
     steps:
       - name: Test
         run: echo "Valor: $MY_VAR"
-
 
