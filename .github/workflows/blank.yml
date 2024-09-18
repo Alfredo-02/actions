@@ -1,18 +1,25 @@
-name: Local-Action
+name: SSH Key Test
 
 on: [push]
 
 jobs:
-  say-hello:
+  test-ssh-key:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ls
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{secrets.SSH_KEY}}" >> ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 12.0.1.1 >> ~/.ssh/known_hosts
+      - name: Crear directorio .ssh
+        run: mkdir -p ~/.ssh
 
+      - name: Agregar clave SSH
+        run: |
+          echo "${{secrets.SSH_KEY}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ls -l ~/.ssh
+
+      - name: Agregar clave del host
+        run: |
+          ssh-keyscan -H 12.0.1.1 >> ~/.ssh/known_hosts
           cat ~/.ssh/known_hosts
-          
+
+      - name: Mostrar contenido del directorio .ssh
+        run: ls -la ~/.ssh
