@@ -9,7 +9,6 @@ jobs:
   steps:
   - name: Hola mundo
     run: echo "Hola mundo"
- HEAD
 
   other:  
   runs-on: ubuntu-latest
@@ -17,4 +16,3 @@ jobs:
   steps:
   - name: LS
     run: ls -al
- 859376917abdfc0094b14ca839901582be675717
