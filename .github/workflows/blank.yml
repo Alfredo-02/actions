@@ -12,4 +12,5 @@ jobs:
         uses: actions/checkout@v3
       - name: ls
         uses: ./.github/actions/my-action
-
+        with:
+          message: "Alfredo"
