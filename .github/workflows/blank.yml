@@ -6,20 +6,20 @@ jobs:
   test-ssh-key:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        php-version: [7.4,8.0,8.1]
+    
     steps:
-      - name: Crear directorio .ssh
-        run: mkdir -p ~/.ssh
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Agregar clave SSH
+      - name: SET up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Run Script
         run: |
-          echo "${{secrets.SSH_KEY}}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ls -l ~/.ssh
-
-      - name: Agregar clave del host
-        run: |
-          ssh-keyscan -v -H 12.0.1.1 >> ~/.ssh/known_hosts || { echo "ssh-keyscan failed"; exit 1; }
-          cat ~/.ssh/known_hosts
-
-      - name: Mostrar contenido del directorio .ssh
-        run: ls -la ~/.ssh
+          echo "PHP VERSION ${{ matrix.php-version }}"
+          php -v 
