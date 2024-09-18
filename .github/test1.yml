@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: LS
-        run: ls -al
+        uses: ./.github/actions/my-action
