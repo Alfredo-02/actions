@@ -6,9 +6,8 @@ jobs:
   say-hello:
     runs-on: ubuntu-latest
     
-    env:
-      MY_VAR: "Mi variable de entorno prueba"
-  
     steps:
       - name: Test
+        env:
+          MY_VAR: "Mi variable de entorno prueba"
         run: echo "Valor: ${{ env.MY_VAR }}"
