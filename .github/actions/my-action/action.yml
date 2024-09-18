@@ -6,10 +6,7 @@ inputs:
     description: "The message to print"
     required: true
     default: "Hola"
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
+
 
 runs:
   using: "composite"
