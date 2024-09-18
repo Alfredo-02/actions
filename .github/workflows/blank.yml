@@ -1,4 +1,4 @@
-name: Ejemplo de Composite Action
+name: Local-Action
 
 on: [push]
 
@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ls
+      - name: ls
         run: |
           mkdir -p ~/.ssh
           echo "${{secrets.SSH_KEY}}" >> ~/.ssh/id_rsa
