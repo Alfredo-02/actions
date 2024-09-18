@@ -10,11 +10,35 @@ jobs:
       MY_VAR: Mi variable entorno
 
     steps:
-      - name: Ls
+      - name: Setup SSH
         run: |
+          # Crear el directorio .ssh si no existe
           mkdir -p ~/.ssh
-          echo "${{secrets.SSH_KEY}}" >> ~/.ssh/id_rsa
+          
+          # Escribir la clave SSH en el archivo id_rsa
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          if [ $? -ne 0 ]; then
+            echo "Error al escribir la clave privada en ~/.ssh/id_rsa"
+            exit 1
+          fi
+          
+          # Establecer permisos seguros para la clave privada
           chmod 600 ~/.ssh/id_rsa
+          if [ $? -ne 0 ]; then
+            echo "Error al cambiar permisos para ~/.ssh/id_rsa"
+            exit 1
+          fi
+          
+          # Agregar la clave pública del servidor a known_hosts
           ssh-keyscan -H 12.0.1.1 >> ~/.ssh/known_hosts
-
+          if [ $? -ne 0 ]; then
+            echo "Error al escanear la clave pública del servidor"
+            exit 1
+          fi
+          
+          # Mostrar el contenido de known_hosts
           cat ~/.ssh/known_hosts
+          if [ $? -ne 0 ]; then
+            echo "Error al mostrar el contenido de ~/.ssh/known_hosts"
+            exit 1
+          fi
