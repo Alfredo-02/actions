@@ -18,7 +18,7 @@ jobs:
 
       - name: Agregar clave del host
         run: |
-          ssh-keyscan -H 12.0.1.1 >> ~/.ssh/known_hosts
+          ssh-keyscan -v -H 12.0.1.1 >> ~/.ssh/known_hosts || { echo "ssh-keyscan failed"; exit 1; }
           cat ~/.ssh/known_hosts
 
       - name: Mostrar contenido del directorio .ssh
