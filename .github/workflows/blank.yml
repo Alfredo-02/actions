@@ -5,12 +5,10 @@ on: [push]
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-    
-    env:
-      MY_VAR: Mi variable de entorno prueba
-  
+
     steps:
       - name: Test
+        run: |
+          echo "Valor: $STEP_MY_VAR"
         env:
           STEP_MY_VAR: Nivel step
-        run: echo "Valor: $STEP_MY_VAR"
