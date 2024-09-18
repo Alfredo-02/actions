@@ -10,10 +10,11 @@ jobs:
       MY_VAR: Mi variable entorno
 
     steps:
-      - name: Test
+      - name: Ls
         run: |
-          echo "Valor  ${{ vars.MY_VARIABLE_2 }}"
+          mkdir -p ~/.ssh
+          echo "${{secrets.SSH_KEY}}" >> ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscam -H 12.0.1.1 >> ~/.ssh/known_hosts
 
-      - name: Secret
-        run: echo "Secret ${{ secrets.MY_SECRET}}"
-        
+          cat ~/.ssh/known_hosts
